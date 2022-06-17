@@ -8,15 +8,15 @@ interface MemoDao {
     @Query(
         "SELECT * FROM memo where memo.id = :id LIMIT 1"
     )
-    fun findById(id: Long): Memo
+    suspend fun findById(id: Long): Memo
 
     @Insert
-    fun insert(memo: Memo)
+    suspend fun insert(memo: Memo)
 
     @Update
-    fun update(memo: Memo)
+    suspend fun update(memo: Memo)
 
     @Delete
-    fun delete(memo: Memo)
+    suspend fun delete(memo: Memo)
 
 }

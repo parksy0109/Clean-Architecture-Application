@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -37,8 +38,11 @@ class SimpleEntityReadWriteTest {
         val title = "test title"
         val content = "test content"
         val memo = Memo(1L, title, content)
-        memoDao.insert(memo)
-        val value  = memoDao.findById(1L)
-        assert(title == value.title)
+
+        runBlocking {
+            memoDao.insert(memo)
+            val value  = memoDao.findById(1L)
+            assert(title == value.title)
+        }
     }
 }
